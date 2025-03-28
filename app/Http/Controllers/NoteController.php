@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\View\View;
 use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
-
+use Illuminate\Support\Facades\Auth;
 class NoteController extends Controller
 {
     /**
@@ -17,11 +17,12 @@ class NoteController extends Controller
      */
     public function index(): View
     {
-        $notes = Note::latest()->paginate(5);
-
+        $notes = auth()->user()->notes()->latest()->paginate(5);
+    
         return view('notes.index', compact('notes'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+                    ->with('i', (request()->input('page', 1) - 1) * 5);
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -36,11 +37,12 @@ class NoteController extends Controller
      */
     public function store(NoteStoreRequest $request): RedirectResponse
     {
-        Note::create($request->validated());
-
-        return redirect()->route('notes.index')
-            ->with('success', 'Note created successfully.');
+        auth()->user()->notes()->create($request->validated());
+    
+        return redirect()->route('notes.index')->with('success', 'Note created successfully.');
     }
+    
+
 
     /**
      * Display the specified resource.
@@ -63,11 +65,16 @@ class NoteController extends Controller
      */
     public function update(NoteUpdateRequest $request, Note $note): RedirectResponse
     {
+        if ($note->user_id !== auth()->id()) {
+            abort(403);
+        }
+    
         $note->update($request->validated());
-
+    
         return redirect()->route('notes.index')
-            ->with('success', 'Note updated successfully');
+                         ->with('success', 'Note updated successfully.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -77,6 +84,6 @@ class NoteController extends Controller
         $note->delete();
 
         return redirect()->route('notes.index')
-            ->with('success', 'Note deleted successfully');
+                        ->with('success', 'Note deleted successfully');
     }
 }

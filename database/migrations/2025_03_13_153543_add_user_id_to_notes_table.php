@@ -10,11 +10,12 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::table('notes', function (Blueprint $table) {
-            $table->text('subject')->after('title');
-        });
-    }
+{
+    Schema::table('notes', function (Blueprint $table) {
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    });
+}
+
 
     /**
      * Reverse the migrations.
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('notes', function (Blueprint $table) {
-            $table->dropColumn('subject');
+            //
         });
     }
 };

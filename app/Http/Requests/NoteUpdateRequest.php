@@ -23,8 +23,8 @@ class NoteUpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'subject' => 'required|string',
             'content' => 'required|string',
+            'subject' => 'required|string',
         ];
     }
 }

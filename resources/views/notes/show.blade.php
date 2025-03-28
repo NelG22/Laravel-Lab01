@@ -19,14 +19,14 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                 <div class="form-group">
-                    <strong>Subject:</strong> <br/>
-                    {{ $note->subject }}
+                    <strong>contents:</strong> <br/>
+                    {{ $note->content }}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                 <div class="form-group">
-                    <strong>Content:</strong> <br/>
-                    {{ $note->content }}
+                    <strong>subject:</strong> <br/>
+                    {{ $note->subject }}
                 </div>
             </div>
         </div>

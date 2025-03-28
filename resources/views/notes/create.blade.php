@@ -21,36 +21,37 @@
                     class="form-control @error('title') is-invalid @enderror"
                     id="inputName"
                     placeholder="Title">
-                @error('title')
+                @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="mb-3">
-                <label for="inputSubject" class="form-label"><strong>Subject:</strong></label>
-                <input
-                    type="text"
-                    name="subject"
-                    class="form-control @error('subject') is-invalid @enderror"
-                    id="inputSubject"
-                    placeholder="Subject">
-                @error('subject')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="inputcontent" class="form-label"><strong>Content:</strong></label>
+                <label for="inputcontent" class="form-label"><strong>content:</strong></label>
                 <textarea
                     class="form-control @error('content') is-invalid @enderror"
                     style="height:150px"
                     name="content"
                     id="inputcontent"
-                    placeholder="Content"></textarea>
+                    placeholder="content"></textarea>
                 @error('content')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="mb-3">
+                <label for="inputcontent" class="form-label"><strong>subject:</strong></label>
+                <textarea
+                    class="form-control @error('subject') is-invalid @enderror"
+                    style="height:150px"
+                    name="subject"
+                    id="inputcontent"
+                    placeholder="subject"></textarea>
+                @error('subject')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
         </form>
 
